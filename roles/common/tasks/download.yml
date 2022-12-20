@@ -1,0 +1,17 @@
+- name: Unarchive a file that needs to be downloaded
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+    dest: /tmp/{{COMPONENT}}.zip
+    remote_src: yes
+
+- name: Remove the directory path
+  ansible.builtin.file:
+    path: "{{APP_LOCATION}}"
+    state: absent
+
+- name: Create a directory path
+  ansible.builtin.file:
+    path: "{{APP_LOCATION}}"
+    state: directory
+
+

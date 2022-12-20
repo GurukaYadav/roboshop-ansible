@@ -1,17 +1,6 @@
 #
-#    PRINT "Install nginx"
-#    yum install nginx -y &>>${LOG}
-#    CHECK_STAT $?
 #
-#    PRINT "Download ${COMPONENT} content"
-#    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
-#    CHECK_STAT $?
 #
-#    cd /usr/share/nginx/html
-#
-#    PRINT "Remove old content"
-#    rm -rf * &>>${LOG}
-#    CHECK_STAT $?
 #
 #    PRINT "Organize ${COMPONENT} content"
 #    unzip /tmp/${COMPONENT}.zip &>>${LOG} && mv ${COMPONENT}-main/static/* . &>>${LOG} && mv ${COMPONENT}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
@@ -29,3 +18,21 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
+
+- name: Import content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Move the content to the app location
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main{{SUFFIX}}/
+    dest: "{{APP_LOCATION}}"
+    remote_src: yes
+
+- name: Start nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: yes
+
