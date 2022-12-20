@@ -24,6 +24,11 @@
     name: common
     tasks_from: download
 
+- name: Remove the directory path
+  ansible.builtin.file:
+    path: /tmp/{{COMPONENT}}.zip
+    state: absent
+
 - name: Move the content to the app location
   ansible.builtin.copy:
     src: /tmp/{{COMPONENT}}-main{{SUFFIX}}/
