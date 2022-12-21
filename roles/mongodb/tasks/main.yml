@@ -1,0 +1,61 @@
+
+
+#PRINT "Update mongod configuration"
+#sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Start mongodb service"
+#systemctl enable mongod &>>${LOG} && systemctl restart mongod &>>${LOG}
+#CHECK_STAT $?
+#
+#
+#PRINT "Download schema"
+#curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>${LOG}
+#CHECK_STAT $?
+#
+#cd /tmp
+#
+#PRINT "Extracting mongodb content"
+#unzip -o mongodb.zip &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Load mongodb content"
+#cd mongodb-main && mongo < catalogue.js &>>${LOG} &&  mongo < users.js &>>${LOG}
+#CHECK_STAT $?
+
+- name: Download mongodb repo
+  ansible.builtin.template:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install mongodb
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: Update mongod configuration
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start mongodb service
+  ansible.builtin.systemd:
+    name: mongod
+    state: restarted
+    enabled: yes
+
+- name: Download and extract {{COMPONENT}} content
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Load mongodb content
+  community.mongodb.mongodb_shell:
+    file: "/tmp/{{COMPONENT}}-main/{{item}}.js"
+    idempotent: yes
+  loop:
+    - catalogue
+    - users
+
