@@ -21,7 +21,7 @@ SYSTEMD
 - name: setup nodejs repository
   ansible.builtin.shell: https://rpm.nodesource.com/setup_16.x | sudo bash
 
-- name: Install NodeJS
+- name: Install nodejs
   ansible.builtin.yum:
     name: nodejs
     state: installed
