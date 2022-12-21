@@ -11,12 +11,12 @@
 #mv ${COMPONENT}-main ${COMPONENT}
 #cd ${COMPONENT}
 #
-PRINT "Install NodeJS dependencies"
-npm install &>>${LOG}
-CHECK_STAT $?
-    
-SYSTEMD
-}
+#PRINT "Install NodeJS dependencies"
+#npm install &>>${LOG}
+#CHECK_STAT $?
+#
+#SYSTEMD
+#}
 
 - name: Setup nodejs repository
   ansible.builtin.shell:  curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
