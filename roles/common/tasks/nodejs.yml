@@ -18,7 +18,7 @@ CHECK_STAT $?
 SYSTEMD
 }
 
-- name: Setting up NodeJS repository
+- name: Setting up nodejs repository
   ansible.builtin.shell: https://rpm.nodesource.com/setup_16.x | sudo bash
 
 - name: Install NodeJS
