@@ -18,8 +18,8 @@ CHECK_STAT $?
 SYSTEMD
 }
 
-- name: setup nodejs repository
-  ansible.builtin.shell: https://rpm.nodesource.com/setup_16.x | sudo bash
+- name: Setup nodejs repository
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash
 
 - name: Install nodejs
   ansible.builtin.yum:
