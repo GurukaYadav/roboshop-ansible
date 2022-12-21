@@ -1,24 +1,24 @@
 - name: Unarchive a file that needs to be downloaded
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-    dest: /tmp/{{COMPONENT}}.zip
+    dest: /tmp
     remote_src: yes
 
-#- name: Remove the {{APP_LOCATION}} path
-#  ansible.builtin.file:
-#    path: "{{APP_LOCATION}}"
-#    state: absent
-#
-#- name: Create the {{APP_LOCATION}} path
-#  ansible.builtin.file:
-#    path: "{{APP_LOCATION}}"
-#    state: directory
-#
-#- name: Move the content to the app location
-#  ansible.builtin.copy:
-#    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
-#    dest: "{{APP_LOCATION}}"
-#    remote_src: yes
+- name: Remove the {{APP_LOCATION}} path
+  ansible.builtin.file:
+    path: "{{APP_LOCATION}}"
+    state: absent
+
+- name: Create the {{APP_LOCATION}} path
+  ansible.builtin.file:
+    path: "{{APP_LOCATION}}"
+    state: directory
+
+- name: Move the content to the app location
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
+    dest: "{{APP_LOCATION}}"
+    remote_src: yes
 
 
 
