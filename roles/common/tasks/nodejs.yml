@@ -1,0 +1,37 @@
+#PRINT "Setting up NodeJS repository"
+#curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Install NodeJS"
+#yum install nodejs -y &>>${LOG}
+##CHECK_STAT $?
+#
+#APP_COMMON_SETUP
+#
+#mv ${COMPONENT}-main ${COMPONENT}
+#cd ${COMPONENT}
+#
+PRINT "Install NodeJS dependencies"
+npm install &>>${LOG}
+CHECK_STAT $?
+    
+SYSTEMD
+}
+
+- name: Setting up NodeJS repository
+  ansible.builtin.shell: https://rpm.nodesource.com/setup_16.x | sudo bash
+
+- name: Install NodeJS
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Import a role for {{COMPONENT}} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install packages based on package.json.
+  community.general.npm:
+    path: "{{APP_LOCATION}}"
+

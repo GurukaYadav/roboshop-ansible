@@ -1,3 +1,7 @@
+- name: Create application user
+  ansible.builtin.user:
+    name: roboshop
+
 - name: Unarchive a file that needs to be downloaded
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
