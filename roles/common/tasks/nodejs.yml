@@ -36,7 +36,7 @@
     path: "{{APP_LOCATION}}"
 
 - name: Setup {{COMPONENT}} systemd configuration
-  ansible.built.template:
+  ansible.builtin.template:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
 
