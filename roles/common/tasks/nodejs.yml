@@ -35,7 +35,7 @@
   community.general.npm:
     path: "{{APP_LOCATION}}"
 
-- name: Setting up {{COMPONENT}} SystemD configuration
+- name: Setup {{COMPONENT}} systemd configuration
   ansible.built.template:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
