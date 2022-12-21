@@ -10,7 +10,7 @@
 
 - name: Copy the configuration file
   ansible.builtin.template:
-    src: localhost.conf
+    src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
     remote_src: yes
 
