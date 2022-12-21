@@ -39,7 +39,7 @@
 
 - name: start {{COMPONENT}} service
   ansible.builtin.systemd:
-    name: {{COMPONENT}}
+    name: "{{COMPONENT}}"
     enabled: yes
     state: restarted
 
