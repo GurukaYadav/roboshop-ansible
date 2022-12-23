@@ -1,6 +1,4 @@
 
-#MYSQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-#
 #echo "show databases;" | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
 #if [ $? -ne 0 ]; then
 #PRINT "Reset mysql password"
@@ -47,6 +45,18 @@
     src: /var/log/mysqld.log
   register: mysql_log
 
-- name: print the data from the mysql_log
-  ansible.builtin.debug:
-    msg: "{{ mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
+- name: fetch the password from mysql_log
+  ansible.builtin.set_fact:
+    DEFAULT_PASSWORD: "{{ mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
+
+- name: print the list of databases in mysqld
+  community.mysql.mysql_query:
+    login_db: mysqld
+    query: show databases;
+    login_user: root
+    login_password: "{{MYSQL_PASSWORD}}"
+    register: mysql_conn
+
+- name: Run only if the task that registered the "result" variable fails
+    ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
+    when: mysql_conn is failed
