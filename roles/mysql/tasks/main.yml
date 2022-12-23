@@ -42,8 +42,11 @@
     state: started
     enabled: yes
 
-- name: Find out what the remote machine's mounts are
+- name: Fetching the mysql file data
   ansible.builtin.slurp:
     src: /var/log/mysqld.log
   register: mysqld_log
-  
+
+- name: print the datat form the mysqld.log
+  ansible.built.debug:
+    msg: "{{mysql_log}}"
