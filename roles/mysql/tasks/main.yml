@@ -57,8 +57,9 @@
     login_user: root
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
-    ignore_errors: yes
     register: mysql_conn
+    ignore_errors: yes
+
 
 - name: Run only if the task that registered the "result" variable fails
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
