@@ -36,6 +36,6 @@
 #CHECK_STAT $?
 
 - name: Fail if the MYSQL_PASSWORD env variable is not declared
-    ansible.builtin.fail:
-      msg: Need MYSQL_PASSWORD env variable
-    when: MYSQL_PASSWORD is undefined
+  ansible.builtin.fail:
+    msg: Need MYSQL_PASSWORD env variable
+  when: MYSQL_PASSWORD is undefined
