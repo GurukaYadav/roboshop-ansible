@@ -1,9 +1,5 @@
 
-#if [ -z ${MYSQL_PASSWORD} ]; then
-#echo "Need MYSQL_PASSWORD env variable"
-#exit 1
-#fi
-#
+
 #PRINT "Download Yum repos"
 #curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG}
 #CHECK_STAT $?
@@ -39,3 +35,19 @@
   ansible.builtin.fail:
     msg: Need MYSQL_PASSWORD env variable
   when: MYSQL_PASSWORD is undefined
+
+- name: Copy mysql yum repos
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install mysql server
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: start mysql service
+  ansible.builtin.systemd:
+    name: ysqld
+    state: started
+    enabled: yes
