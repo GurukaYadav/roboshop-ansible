@@ -35,7 +35,7 @@
 #cd /tmp && unzip -o mysql.zip &>>${LOG} && cd mysql-main && mysql -u root -p"${MYSQL_PASSWORD}" < shipping.sql &>>${LOG}
 #CHECK_STAT $?
 
-- name: Fail if the MYSQL_PASSWORD en variable is not declared
+- name: Fail if the MYSQL_PASSWORD env variable is not declared
     ansible.builtin.fail:
-      msg= "Need MYSQL_PASSWORD env variable"
+      msg: Need MYSQL_PASSWORD env variable
     when: MYSQL_PASSWORD is undefined
