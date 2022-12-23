@@ -1,14 +1,4 @@
 
-
-#PRINT "Download Yum repos"
-#curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG}
-#CHECK_STAT $?
-#
-#PRINT "Install mysql"
-#yum install mysql-community-server -y &>>${LOG}
-#systemctl enable mysqld &>>${LOG} && systemctl start mysqld &>>${LOG}
-#CHECK_STAT $?
-#
 #MYSQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 #
 #echo "show databases;" | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
@@ -51,3 +41,8 @@
     name: mysqld
     state: started
     enabled: yes
+
+- name: Find out what the remote machine's mounts are
+  ansible.builtin.slurp:
+    src: /var/log/mysqld.log
+  register: temporary password
