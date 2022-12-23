@@ -59,4 +59,4 @@
 
 - name: Run only if the task that registered the "result" variable fails
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
-    when: mysql_conn is failed
+  when: mysql_conn is failed
