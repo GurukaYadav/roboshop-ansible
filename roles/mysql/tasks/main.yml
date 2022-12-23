@@ -45,4 +45,4 @@
 - name: Find out what the remote machine's mounts are
   ansible.builtin.slurp:
     src: /var/log/mysqld.log
-  register: temporary password
+  DEFAULT_PASSWORD: 'temporary password'
