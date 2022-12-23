@@ -70,7 +70,7 @@
   ignore_errors: yes
 
 - name: Uninstall plugin validate_password
-  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"${MYSQL_PASSWORD}"
+  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
   when: plugin_info is succeeded
 
 - name: Download and extract {{COMPONENT}} content
