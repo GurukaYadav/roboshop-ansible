@@ -58,21 +58,35 @@
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
     ignore_errors: yes
+    register: mysql_conn
 
-- name: Copy mysql new password
-  ansible.builtin.template:
-    src: newpass.mysql
-    dest: /tmp
-
-- name: Reset mysql login password
-  community.mysql.mysql_db:
-    state: import
-    name: all
-    target: /tmp/newpass.mysql
-    login_user: root
-    login_password: "{{DEFAULT_PASSWORD}}"
+- name: Run only if the task that registered the "result" variable fails
+  ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
+  when: mysql_conn is failed
 
 
+
+
+
+
+
+
+
+#- name: Copy mysql new password
+#  ansible.builtin.template:
+#    src: newpass.mysql
+#    dest: /tmp
+#
+#- name: Reset mysql login password
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /tmp/newpass.mysql
+#    login_user: root
+#    login_password: "{{DEFAULT_PASSWORD}}"
+#
+#
+#
 
 
 #- name: print the list of databases in mysqld
