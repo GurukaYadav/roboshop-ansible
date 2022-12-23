@@ -57,14 +57,36 @@
     login_user: root
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
-    register: mysql_conn
-    ignore_errors: yes
-
+  register: mysql_conn
+  ignore_errors: yes
 
 - name: Run only if the task that registered the "result" variable fails
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
   when: mysql_conn is failed
 
+- name: Check the  plugin validate_password
+  ansible.builtin.shell: echo "show plugins;" |  mysql -uroot -p"${MYSQL_PASSWORD}" | grep validate_password
+  register: plugin_info
+  ignore_errors: yes
+
+- name: Uninstall plugin validate_password
+  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"${MYSQL_PASSWORD}"
+  when: plugin_info is succeeded
+
+- name: Download and extract {{COMPONENT}} content
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Load {{COMPONENT}} schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    encoding: latin1
+    target: /tmp/{{COMPONENT}}-main/shipping.sql
+    login_user: root
+    login_password: "{{MYSQL_PASSWORD}}"
 
 
 
@@ -73,31 +95,3 @@
 
 
 
-#- name: Copy mysql new password
-#  ansible.builtin.template:
-#    src: newpass.mysql
-#    dest: /tmp
-#
-#- name: Reset mysql login password
-#  community.mysql.mysql_db:
-#    state: import
-#    name: all
-#    target: /tmp/newpass.mysql
-#    login_user: root
-#    login_password: "{{DEFAULT_PASSWORD}}"
-#
-#
-#
-
-
-#- name: print the list of databases in mysqld
-#  community.mysql.mysql_query:
-#    login_db: mysqld
-#    query: show databases;
-#    login_user: root
-#    login_password: "{{MYSQL_PASSWORD}}"
-#    register: mysql_conn
-#
-#- name: Run only if the task that registered the "result" variable fails
-#  ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
-#  when: mysql_conn is failed
