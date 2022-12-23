@@ -60,11 +60,11 @@
   register: mysql_conn
   ignore_errors: yes
 
-- name: Run only if the task that registered the "result" variable fails
+- name: Reset mysql root password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
   when: mysql_conn is failed
 
-- name: Check the  plugin validate_password
+- name: Check the plugin validate_password
   ansible.builtin.shell: echo "show plugins;" |  mysql -uroot -p"${MYSQL_PASSWORD}" | grep validate_password
   register: plugin_info
   ignore_errors: yes
