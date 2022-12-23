@@ -48,5 +48,5 @@
   register: mysqld_log
 
 - name: print the data from the mysqld_log
-  ansible.built.debug:
+  ansible.builtin.debug:
     msg: "{{mysql_log}}"
