@@ -49,4 +49,4 @@
 
 - name: print the data from the mysqld.log
   ansible.built.debug:
-    msg: "{{mysql_log}}"
+    msg: "{{mysql.log}}"
