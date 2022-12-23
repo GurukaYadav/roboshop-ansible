@@ -47,6 +47,6 @@
     src: /var/log/mysqld.log
   register: mysqld_log
 
-- name: print the datat form the mysqld.log
+- name: print the data from the mysqld.log
   ansible.built.debug:
     msg: "{{mysql_log}}"
