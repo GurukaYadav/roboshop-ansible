@@ -37,5 +37,5 @@
 
 - name: Fail if the MYSQL_PASSWORD en variable is not declared
     ansible.builtin.fail:
-      msg: Need MYSQL_PASSWORD env variable
+      msg= "Need MYSQL_PASSWORD env variable"
     when: MYSQL_PASSWORD is undefined
