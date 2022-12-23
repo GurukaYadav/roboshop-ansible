@@ -45,8 +45,8 @@
 - name: Fetching the mysql file data
   ansible.builtin.slurp:
     src: /var/log/mysqld.log
-  register: mysqld_log
+  register: mysqld.log
 
-- name: print the data from the mysqld_log
+- name: print the data from the mysqld.log
   ansible.builtin.debug:
-    msg: "{{mysql_log}}"
+    msg: "{{mysql.log}}"
