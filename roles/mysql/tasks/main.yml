@@ -48,6 +48,6 @@
 
 - name: start mysql service
   ansible.builtin.systemd:
-    name: ysqld
+    name: mysqld
     state: started
     enabled: yes
