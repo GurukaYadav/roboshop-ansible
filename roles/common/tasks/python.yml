@@ -42,7 +42,7 @@
 
 - name: Update user and group id's
   ansible.builtin.lineinfile:
-    path: /home/roboshop/{{COMPONENT}/{{COMPONENT}}.ini
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^{{item.key}}'
     line: "{{item.value}}"
   loop:
