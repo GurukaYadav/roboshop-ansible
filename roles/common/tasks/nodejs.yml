@@ -35,14 +35,10 @@
   community.general.npm:
     path: "{{APP_LOCATION}}"
 
-- name: Setup {{COMPONENT}} systemd configuration
-  ansible.builtin.template:
-    src: systemd.service
-    dest: /etc/systemd/system/{{COMPONENT}}.service
+- name: Import a role for {{COMPONENT}} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
 
-- name: start {{COMPONENT}} service
-  ansible.builtin.systemd:
-    name: "{{COMPONENT}}"
-    daemon_reload: yes
-    state:  restarted
+
 

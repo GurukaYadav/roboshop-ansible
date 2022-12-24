@@ -1,0 +1,25 @@
+
+#CHECK_ROOT
+#
+#PRINT "Install maven"
+#yum install maven -y &>>${LOG}
+#CHECK_STAT $?
+#
+#APP_COMMON_SETUP
+#
+#mv ${COMPONENT}-main ${COMPONENT}
+#cd shipping
+#
+#PRINT "Install maven dependencies"
+#mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>${LOG}
+#CHECK_STAT $?
+#
+#SYSTEMD
+#
+
+- name: Import a role for {{COMPONENT}} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: java
+
+
