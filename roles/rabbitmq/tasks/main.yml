@@ -1,0 +1,70 @@
+
+#if [ -z "${RABBITMQ_USER_PASSWORD}"]; then
+#echo "Env Variable RABBITMQ_USER_PASSWORD needed"
+#exit 1
+#fi
+#
+#PRINT "Download erlang repos"
+#curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash  &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Install erlang"
+#yum install erlang -y &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Download rabbitmq repos"
+#curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash  &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Install rabbitmq"
+#yum install rabbitmq-server -y &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "Start rabbitmq"
+#systemctl enable rabbitmq-server &>>${LOG} && systemctl restart rabbitmq-server &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "rabbitmq user"
+#rabbitmqctl add_user roboshop "${RABBITMQ_USER_PASSWORD}" &>>${LOG}
+#CHECK_STAT $?
+#
+#PRINT "setup user tags and permissions"
+#rabbitmqctl set_user_tags roboshop administrator &>>${LOG} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG}
+#CHECK_STAT $?
+
+- name: Fail if the RABBITMQ_USER_PASSWORD variable is not declared
+  ansible.builtin.fail:
+    msg: Need RABBITMQ_USER_PASSWORD variable
+  when: RABBITMQ_USER_PASSWORD is undefined
+
+- name: Download erlang and rabbitmq repos
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash && curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+
+- name: Install erlang and rabbitmq-server
+  ansible.builtin.yum:
+    name:
+      - erlang
+      - rabbitmq-server
+    state: installed
+
+- name: start rabbitmq service
+  ansible.builtin.systemd:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+- name: Create a rabbitmq user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: "{{RABBITMQ_USER_PASSWORD}}"
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
+    tags: administrator
+
+
+
+
+
