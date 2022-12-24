@@ -44,6 +44,15 @@
   ansible.builtin.debug:
     msg: UID={{item.uid}" , GID={{item.gid}}
   loop:
-    - {uid: "{{user_info.uid}}"}
-    - {gid: "{{user_info.group}}"}
+    - uid: "{{user_info.uid}}"
+    - gid: "{{user_info.group}}"
+
+- name: Update user and group id's
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}/{{COMPONENT}}.ini
+    regexp: '^{{item.key}}'
+    line: "{{item.value}}"
+  loop:
+    - {key: uid, value: "{{uid= user_info.uid}}"}
+    - {key: gid, value: "{{gid= user_info.group}}"}
 
