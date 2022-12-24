@@ -40,7 +40,10 @@
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
-- name: Print user info
+- name: Update user and group id's
   ansible.builtin.debug:
-    msg: "{{user_info}}"
+    msg: UID={{item.uid}" , GID={{item.gid}}
+  loop:
+    - {uid: "{{user_info.UID}}"}
+    - {gid: "{{user_info.GROUP}}"}
 
