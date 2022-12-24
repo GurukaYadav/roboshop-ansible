@@ -44,6 +44,6 @@
   ansible.builtin.debug:
     msg: UID={{item.uid}" , GID={{item.gid}}
   loop:
-    - {uid: "{{user_info.UID}}"}
-    - {gid: "{{user_info.GROUP}}"}
+    - {uid: "{{user_info.uid}}"}
+    - {gid: "{{user_info.group}}"}
 
