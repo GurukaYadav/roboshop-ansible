@@ -1,6 +1,7 @@
 - name: Create application user
   ansible.builtin.user:
     name: roboshop
+  register: user_info
 
 - name: Unarchive a file that needs to be downloaded
   ansible.builtin.unarchive:

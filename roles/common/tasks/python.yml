@@ -1,0 +1,46 @@
+#  PYTHON() {
+#    CHECK_ROOT
+#
+#    PRINT "Install python 3"
+#    yum install python36 gcc python3-devel -y &>>${LOG}
+#    CHECK_STAT $?
+#
+#    APP_COMMON_SETUP
+#
+#    mv ${COMPONENT}-main ${COMPONENT}
+#    PRINT "Install python dependencies"
+#    cd /home/roboshop/${COMPONENT} && pip3 install -r requirements.txt &>>${LOG}
+#    CHECK_STAT $?
+#
+#    USER_ID=$(id -u roboshop)
+#    GROUP_ID=$(id -g roboshop)
+#
+#    PRINT "Update user and group id's"
+#    sed -i -e '/^uid/ c /uid=${USER_ID}/'  -e '/^gid/ c /gid=${GROUP_ID}/' /home/roboshop/${COMPONENT}/${COMPONENT}.ini
+#    CHECK_STAT $?
+#
+#    SYSTEMD
+#  }
+
+- name: Install python 3
+  ansible.builtin.yum:
+    name:
+      - python36
+      - gcc
+      - python3-devel
+    state: installed
+
+- name: Import a role for {{COMPONENT}} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install python dependencies
+  ansible.builtin.pip:
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
+    executable: pip3
+
+- name: Print user info
+  ansible.builtin.debug:
+    msg: "{{user_info}}"
+
