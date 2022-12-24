@@ -46,6 +46,12 @@
     regexp: '^{{item.key}}'
     line: "{{item.value}}"
   loop:
-    - { key: uid , value: uid= "{{user_info.uid}}" }
-    - { key: gid , value: gid= "{{user_info.group}}" }
+    - { key: uid , value: "uid= {{user_info.uid}}" }
+    - { key: gid , value: "gid= {{user_info.group}}" }
+    
+      
+
+      
+      
+      
 
