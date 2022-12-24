@@ -48,7 +48,11 @@
   loop:
     - { key: "uid" , value: "uid= {{user_info.uid}}" }
     - { key: "gid" , value: "gid= {{user_info.group}}" }
-    
+
+- name: Import a role for {{COMPONENT}} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
       
 
       
