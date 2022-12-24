@@ -1,3 +1,8 @@
+- name: Fail if the RABBITMQ_USER_PASSWORD env variable is not declared
+  ansible.builtin.fail:
+    msg: Need RABBITMQ_USER_PASSWORD env variable
+  when: RABBITMQ_USER_PASSWORD is undefined
+
 - name: Import a role
   ansible.builtin.include_role:
     name: common
