@@ -1,2 +1,2 @@
 COMPONENT: mysql
-MYSQL_PASSWORD: "{{ lookup('amazon.aws.aws_secret', 'roboshop/all') }}"
+MYSQL_PASSWORD: "{{ lookup('amazon.aws.aws_secret', 'region=us-east-1', 'roboshop/all') }}"
