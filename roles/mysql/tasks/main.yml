@@ -24,6 +24,11 @@
     msg: Need MYSQL_PASSWORD env variable
   when: MYSQL_PASSWORD is undefined
 
+- name: Print mysql password
+  ansible.builtin.debug:
+    msg: "{{MYSQL_PASSWORD}}"
+
+
 - name: Copy mysql yum repos
   ansible.builtin.template:
     src: mysql.repo
