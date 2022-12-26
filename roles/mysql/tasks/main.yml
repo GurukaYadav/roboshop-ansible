@@ -24,11 +24,6 @@
     msg: Need MYSQL_PASSWORD env variable
   when: MYSQL_PASSWORD is undefined
 
-- name: Print mysql password
-  ansible.builtin.debug:
-    msg: "{{MYSQL_PASSWORD}}"
-
-
 - name: Copy mysql yum repos
   ansible.builtin.template:
     src: mysql.repo
@@ -55,7 +50,6 @@
 - name: fetch the password from mysql_log
   ansible.builtin.set_fact:
     DEFAULT_PASSWORD: "{{ mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
-
 
 - name: Check if the mysql default password is reset or not
   community.mysql.mysql_info:
