@@ -24,10 +24,6 @@
     msg: Need MYSQL_PASSWORD env variable
   when: MYSQL_PASSWORD is undefined
 
-- name: print mysql password
-  ansible.builtin.debug:
-    msg: "{{MYSQL_PASSWORD}}"
-
 - name: Copy mysql yum repos
   ansible.builtin.template:
     src: mysql.repo
@@ -60,9 +56,9 @@
     login_user: root
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
-  register: mysql_conn
   ignore_errors: yes
-
+  register: mysql_conn
+  
 - name: Reset mysql root password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
   when: mysql_conn is failed
