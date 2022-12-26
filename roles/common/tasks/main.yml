@@ -1,2 +1,9 @@
 - name: Setting the proper hostname
   ansible.builtin.shell: set-hostname {{COMPONENT}}
+
+- name: Install pythom modules for aws secret lookup
+  ansible.builtin.pip:
+    name:
+      - botocore
+      - boto3
+    executable: pip3
