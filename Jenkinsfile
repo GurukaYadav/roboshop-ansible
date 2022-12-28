@@ -15,7 +15,7 @@ pipeline {
 
   stages {
 
-    stage(Individual-component of roboshop) {
+    stage(Individual-component-of-roboshop) {
       steps {
         sh '''
           HOST=$(echo ${COMPONENT} | tr [:lower:] [:upper:])
