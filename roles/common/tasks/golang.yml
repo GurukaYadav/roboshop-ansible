@@ -1,6 +1,6 @@
-- name: Install maven
+- name: Install nodejs
   ansible.builtin.yum:
-    name: maven
+    name: golang
     state: installed
 
 - name: Import a role for {{COMPONENT}} content
@@ -8,10 +8,11 @@
     name: common
     tasks_from: download
 
-#- name: Install maven dependencies
-#  ansible.builtin.shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
-#  args:
-#    chdir: /home/roboshop/{{COMPONENT}}
+#- name: Install golang dependencies
+#  ansible.builtin.shell:
+#    - go mod init dispatch
+#    - go get
+#    - go build
 
 - name: Import a role for {{COMPONENT}} content
   ansible.builtin.include_role:

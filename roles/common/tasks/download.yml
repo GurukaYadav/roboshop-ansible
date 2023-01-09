@@ -3,12 +3,6 @@
     name: roboshop
   register: user_info
 
-- name: Unarchive a file that needs to be downloaded
-  ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-    dest: /tmp
-    remote_src: yes
-
 - name: Remove the {{APP_LOCATION}} path
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
@@ -19,11 +13,24 @@
     path: "{{APP_LOCATION}}"
     state: directory
 
-- name: Move the content to the app location
-  ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
+#- name: Unarchive a file that needs to be downloaded
+#  ansible.builtin.unarchive:
+#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+#    dest: /tmp
+#    remote_src: yes
+
+- name: Unarchive a file that needs to be downloaded
+  ansible.builtin.unarchive:
+    src: http://nexus.devops65.online:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
     dest: "{{APP_LOCATION}}"
     remote_src: yes
+
+
+#- name: Move the content to the app location
+#  ansible.builtin.copy:
+#    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
+#    dest: "{{APP_LOCATION}}"
+#    remote_src: yes
 
 
 
