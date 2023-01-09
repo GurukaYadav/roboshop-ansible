@@ -57,3 +57,9 @@
   become: yes
   roles:
     - payment
+
+- name: Roboshop project setup
+  hosts: DISPATCH
+  become: yes
+  roles:
+    - dispatch
