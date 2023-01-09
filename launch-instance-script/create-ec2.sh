@@ -24,7 +24,7 @@ AMI_ID="ami-07418f7e626609d5b"
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${SG_NAME} | jq  '.SecurityGroups[].GroupId' | sed -e 's/"//g')
 
 if [ "$COMPONENT" == "all" ]; then
-  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis ; do
+  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch ; do
     COMPONENT=$component
     create_ec2
   done
