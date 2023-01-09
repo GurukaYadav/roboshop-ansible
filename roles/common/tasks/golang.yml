@@ -1,4 +1,4 @@
-- name: Install nodejs
+- name: Install golang
   ansible.builtin.yum:
     name: golang
     state: installed
