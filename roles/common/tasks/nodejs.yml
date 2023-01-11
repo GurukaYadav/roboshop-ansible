@@ -31,6 +31,7 @@
     name: common
     tasks_from: download
 
+#This set is done by CI as standard practice
 #- name: Install packages based on package.json.
 #  community.general.npm:
 #    path: "{{APP_LOCATION}}"

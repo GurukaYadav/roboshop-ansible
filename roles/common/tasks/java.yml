@@ -8,6 +8,7 @@
     name: common
     tasks_from: download
 
+#This set is done by CI as standard practice
 #- name: Install maven dependencies
 #  ansible.builtin.shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
 #  args:

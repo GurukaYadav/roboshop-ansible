@@ -8,6 +8,7 @@
     name: common
     tasks_from: download
 
+#This set is done by CI as standard practice
 #- name: Install golang dependencies
 #  ansible.builtin.shell:
 #    - go mod init dispatch
