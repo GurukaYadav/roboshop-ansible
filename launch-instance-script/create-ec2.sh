@@ -5,12 +5,11 @@ SG_NAME="Allow-all-to-public"
 IAM_INSTANCE_PROFILE="Arn=arn:aws:iam::124374336606:instance-profile/role-for-secret-manager-access-to-ec2"
 
 
-if [ -z $1 ]
+if [ -z $1 ]; then
   ENV=""
 else
   ENV="-$1"
 fi
-
 
 COMPONENT=all
 create_ec2() {
