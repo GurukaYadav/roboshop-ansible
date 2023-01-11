@@ -8,7 +8,7 @@ IAM_INSTANCE_PROFILE="Arn=arn:aws:iam::124374336606:instance-profile/role-for-se
 if [ -z $1 ]
   ENV=""
 else
-  ENV=-$1
+  ENV="-$1"
 fi
 
 
