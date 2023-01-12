@@ -21,7 +21,7 @@
 
 #when app-version is not defined, we need to get latest version from Nexus
 - name: Latest version of application from Nexus
-  ansible.builtin.shell: curl -s http://nexus.devops65.online:8081/service/rest/repository/browse/{{COMPONENT}}/ | grep zip | sed -e 's/"/ /g'| xargs -n1|grep ^http | tail -n1
+  ansible.builtin.shell: curl -s http://nexus.roboshop.internal:8081/service/rest/repository/browse/{{COMPONENT}}/ | grep zip | sed -e 's/"/ /g'| xargs -n1|grep ^http | tail -n1
   register: output
   when: APP_VERSION is undefined
 
@@ -32,7 +32,7 @@
 
 - name: Application version given by the user
   ansible.builtin.set_fact:
-    URL: http://nexus.devops65.online:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    URL: http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
   when: APP_VERSION is defined
 
 - name: Unarchive a {{COMPONENT}} file that needs to be downloaded
