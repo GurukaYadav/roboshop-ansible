@@ -4,7 +4,7 @@
     tasks_from: server
   when: SET_TYPE == "server"
 
-- name: Prometheus server setup
+- name: Prometheus client setup
   ansible.builtin.include_role:
     name: prometheus
     tasks_from: client
