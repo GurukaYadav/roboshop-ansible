@@ -19,5 +19,6 @@ scrape_configs:
 #      - targets: [ '172.31.12.216:9100' ]
     ec2_sd_configs:
       - region: us-east-1
+        port: 9100
 
 
