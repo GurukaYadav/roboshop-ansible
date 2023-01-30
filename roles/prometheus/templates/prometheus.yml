@@ -25,7 +25,7 @@ scrape_configs:
             values: ["Yes"]
     relabel_configs:
       - source_labels: [_meta_ec2_tag_<Name>]
-        target_label: Name
+        target_label: name
       - source_labels: [_meta_ec2_instance_id]
         target_label: instance_id
       - source_labels: [_meta_ec2_private_ip]
