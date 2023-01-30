@@ -24,11 +24,11 @@ scrape_configs:
           - name: "tag:Monitor"
             values: ["Yes"]
     relabel_configs:
-      - source_labels: [_meta_ec2_tag_Name]
+      - source_labels: [__meta_ec2_tag_Name]
         target_label: name
-      - source_labels: [_meta_ec2_instance_id]
+      - source_labels: [__meta_ec2_instance_id]
         target_label: instance_id
-      - source_labels: [_meta_ec2_private_ip]
+      - source_labels: [__meta_ec2_private_ip]
         target_label: private_ip
 
 
