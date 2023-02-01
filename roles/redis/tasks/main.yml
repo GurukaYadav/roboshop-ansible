@@ -25,7 +25,9 @@
 
 - name: Install {{COMPONENT}}
   ansible.builtin.yum:
-    name: redis-6.2.7
+    name:
+      - epel-release
+      - redis-6.2.7
     state: installed
 
 - name: Update {{COMPONENT}} configuration
