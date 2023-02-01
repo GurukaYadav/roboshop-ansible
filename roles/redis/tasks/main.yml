@@ -26,8 +26,8 @@
 - name: Install {{COMPONENT}}
   ansible.builtin.yum:
     name:
-      - epel-release
-      - redis-6.2.7
+      - http://rpms.remirepo.net/enterprise/remi-release-7.rpm ; dnf module enable redis:remi-6.2 -y
+      - redis
     state: installed
 
 - name: Update {{COMPONENT}} configuration
