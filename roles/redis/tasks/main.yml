@@ -18,10 +18,10 @@
 #systemctl enable redis &>>${LOG} && systemctl restart redis &>>${LOG}
 #CHECK_STAT $?
 
-- name: Copy {{COMPONENT}} yum repos
-  ansible.builtin.template:
-    src: redis.repo
-    dest: /etc/yum.repos.d/redis.repo
+#- name: Copy {{COMPONENT}} yum repos
+#  ansible.builtin.template:
+#    src: redis.repo
+#    dest: /etc/yum.repos.d/redis.repo
 
 - name: Install {{COMPONENT}}
   ansible.builtin.yum:
