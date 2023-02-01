@@ -26,10 +26,9 @@
 - name: Install {{COMPONENT}}
   ansible.builtin.yum:
     name:
-      - http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      - http://rpms.remirepo.net/enterprise/remi-release-8.rpm,(dnf module enable redis:remi-6.2 -y)
       - redis
     state: installed
-#    enable: dnf module enable redis:remi-6.2 -y
 
 - name: Update {{COMPONENT}} configuration
   ansible.builtin.replace:
