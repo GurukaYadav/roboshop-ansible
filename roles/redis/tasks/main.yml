@@ -22,6 +22,7 @@
 #  ansible.builtin.template:
 #    src: redis.repo
 #    dest: /etc/yum.repos.d/redis.repo
+
 - name: Install redis rpm
   ansible.builtin.command:
     - yum install dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
