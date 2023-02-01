@@ -27,7 +27,6 @@
   ansible.builtin.yum:
     name: redis-6.2.8
     state: installed
-    update_cache: yes
 
 - name: Update {{COMPONENT}} configuration
   ansible.builtin.replace:
