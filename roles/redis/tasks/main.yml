@@ -26,8 +26,8 @@
 - name: Install the latest version of Apache
   ansible.builtin.dnf:
     name:
-      - https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-      - redis:remi-6.2 -y
+      - https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      - redis:remi-6.2 
     state: installed
 
 #
