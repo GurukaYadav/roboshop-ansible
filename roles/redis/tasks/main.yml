@@ -25,9 +25,7 @@
 
 - name: Install {{COMPONENT}}
   ansible.builtin.yum:
-    name:
-      - yum-utils
-      - redis-6.2.7
+    name: redis-6.2.7
     state: installed
 
 - name: Update {{COMPONENT}} configuration
