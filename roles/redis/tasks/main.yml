@@ -23,15 +23,20 @@
 #    src: redis.repo
 #    dest: /etc/yum.repos.d/redis.repo
 
-#- name: Install redis rpm
-#  ansible.builtin.command: dnf module enable redis:remi-6.2 -y
-
-- name: Install {{COMPONENT}}
-  ansible.builtin.yum:
+- name: Install the latest version of Apache
+  ansible.builtin.dnf:
     name:
       - https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
       - redis:remi-6.2 -y
     state: installed
+
+#
+#- name: Install {{COMPONENT}}
+#  ansible.builtin.yum:
+#    name:
+#      - https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+#      - redis:remi-6.2 -y
+#    state: installed
 
 - name: Update {{COMPONENT}} configuration
   ansible.builtin.replace:
