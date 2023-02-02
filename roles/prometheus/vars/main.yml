@@ -1,1 +1,1 @@
-components: ["cart","catalogue","user","frontend","shipping","payment","dispatch"]
+components: ["cart","catalogue","user","nginx","shipping","payment","dispatch"]
