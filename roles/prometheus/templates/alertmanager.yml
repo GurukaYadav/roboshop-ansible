@@ -12,7 +12,7 @@ receivers:
         smarthost: "email-smtp.us-east-1.amazonaws.com:587"
         auth_username: "{{ACCESS_KEY}}"
         auth_password: "{{SECRET_ACCESS_KEY}}"
-        require_tls: true'
+        require_tls: 'true'
 inhibit_rules:
   - source_match:
       severity: 'critical'
