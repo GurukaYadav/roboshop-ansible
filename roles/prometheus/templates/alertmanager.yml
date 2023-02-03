@@ -9,7 +9,7 @@ receivers:
     email_configs:
       - to: "avinash.guruka@gmail.com"
         from: "avinash.guruka@gmail.com"
-        smarthost: "email-smtp.us-east-1.amazonaws.com"
+        smarthost: "email-smtp.us-east-1.amazonaws.com:587"
         auth_username: "${ACCESS_KEY}"
         auth_password: "${SECRET_ACCESS_KEY}"
         require_tls: true'
