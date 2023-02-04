@@ -1,0 +1,4 @@
+- name: rsyslog configuration
+  ansible.builtin.template:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.d/roboshop.conf
