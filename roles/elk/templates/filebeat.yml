@@ -6,8 +6,9 @@ filebeat.inputs:
 
 output.elasticsearch:
   hosts: ["elasticsearch.roboshop.internal:9200"]
+  index: "{{COMPONENT}}"
 
-output.elasticsearch.index: "{{COMPONENT}}"
+setup.ilm.enabled: false
 setup.template.name: "{{COMPONENT}}"
 setup.template.pattern: "{{COMPONENT}}"
 
