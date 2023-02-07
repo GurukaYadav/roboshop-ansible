@@ -7,6 +7,10 @@ filebeat.inputs:
 output.elasticsearch:
   hosts: ["elasticsearch.roboshop.internal:9200"]
 
+output.elasticsearch.index: "{{COMPONENT}}"
+setup.template.name: "{{COMPONENT}}"
+setup.template.pattern: "{{COMPONENT}}"
+
 
 # ----------------------------------------------------------------
 
