@@ -41,6 +41,12 @@
     name: common
     tasks_from: systemd
 
+- name: Install filebeat
+  ansible.builtin.include_role:
+    name: elk
+    tasks_from: filebeat
+
+
 
 
 
