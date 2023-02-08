@@ -5,19 +5,21 @@ filebeat.inputs:
     paths:
       - /var/log/{{COMPONENT}}.log
 
+{% if LOG_TYPE == "json" %}
+  output.elasticsearch:
+    hosts: [ "elasticsearch.roboshop.internal:9200" ]
+    index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+
+  setup.ilm.enabled: false
+  setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+  setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+{% else %}
+  output.logstash:
+    hosts: [ "logstash.roboshop.internal:5044" ]
+{% endif %}
 
 
-output.logstash:
-  hosts: ["logstash.roboshop.internal:5044"]
-  index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 
-output.elasticsearch:
-  hosts: ["elasticsearch.roboshop.internal:9200"]
-  index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
-
-setup.ilm.enabled: false
-setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
-setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 
 
 # ----------------------------------------------------------------
