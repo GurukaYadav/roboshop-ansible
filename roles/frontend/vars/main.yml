@@ -1,3 +1,5 @@
 COMPONENT: frontend
 APP_LOCATION: /usr/share/nginx/html
 SUFFIX: static/
+LOG_TYPE: raw
+LOG_FILE: /var/log/nginx/access.log

@@ -5,6 +5,12 @@ filebeat.inputs:
     paths:
       - /var/log/{{COMPONENT}}.log
 
+
+
+output.logstash:
+  hosts: ["logstash.roboshop.internal:5044"]
+  index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+
 output.elasticsearch:
   hosts: ["elasticsearch.roboshop.internal:9200"]
   index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
