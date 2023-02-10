@@ -6,18 +6,18 @@ filebeat.inputs:
       - {{LOG_FILE}}
 
 {% if LOG_TYPE == "json" %}
-  output.elasticsearch:
-    hosts: [ "elasticsearch.roboshop.internal:9200" ]
-    index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+output.elasticsearch:
+  hosts: [ "elasticsearch.roboshop.internal:9200" ]
+  index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 
-  setup.ilm.enabled: false
-  setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
-  setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+setup.ilm.enabled: false
+setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 {% endif %}
 
 {% if LOG_TYPE == "raw" %}
-  output.logstash:
-    hosts: [ "logstash.roboshop.internal:5044" ]
+output.logstash:
+  hosts: [ "logstash.roboshop.internal:5044" ]
 {% endif %}
 
 
