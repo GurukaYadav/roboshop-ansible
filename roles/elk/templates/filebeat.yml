@@ -18,6 +18,8 @@ setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 {% if LOG_TYPE == "raw" %}
 output.logstash:
   hosts: [ "logstash.roboshop.internal:5044" ]
+fields:
+  component: "{{COMPONENT}}"
 {% endif %}
 
 
