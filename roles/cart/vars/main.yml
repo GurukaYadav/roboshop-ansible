@@ -1,3 +1,5 @@
 COMPONENT: cart
 APP_LOCATION: /home/roboshop/cart
 SUFFIX: /
+LOG_TYPE: json
+LOG_FILE: /var/log/cart.log
