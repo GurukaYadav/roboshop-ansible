@@ -16,11 +16,11 @@
   roles:
     - catalogue
 
-#- name: Roboshop project setup
-#  hosts: REDIS
-#  become: yes
-#  roles:
-#    - redis
+- name: Roboshop project setup
+  hosts: REDIS
+  become: yes
+  roles:
+    - redis
 
 - name: Roboshop project setup
   hosts: CART
