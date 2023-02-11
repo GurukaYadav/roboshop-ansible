@@ -12,6 +12,9 @@ filebeat.inputs:
     multiline.negate: true
     multiline.match: after
 {% endif %}
+{% if COMPONENT == "payment" %}
+    include_lines: ['^\[2']
+{% endif %}
 
 {% if LOG_TYPE == "json" %}
   output.elasticsearch:
