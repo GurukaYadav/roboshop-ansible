@@ -5,7 +5,7 @@ filebeat.inputs:
     json.keys_under_root: true
 {% endif %}
     paths:
-      - "{{LOG_FILE}}"
+      - {{LOG_FILE}}
 {% if COMPONENT == "shipping" %}
     multiline.type: pattern
     multiline.pattern: '^2'
