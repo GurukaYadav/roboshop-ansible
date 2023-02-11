@@ -3,4 +3,4 @@ APP_LOCATION: /home/roboshop/payment
 SUFFIX: /
 RABBITMQ_USER_PASSWORD: "{{SECRETS.RABBITMQ_USER_PASSWORD}}"
 LOG_TYPE: raw
-LOG_FILE: /var/log/shipping.log
+LOG_FILE: /var/log/payment.log
