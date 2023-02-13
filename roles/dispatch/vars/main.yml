@@ -2,3 +2,5 @@ COMPONENT: dispatch
 APP_LOCATION: /home/roboshop/dispatch
 SUFFIX: /
 RABBITMQ_USER_PASSWORD: "{{SECRETS.RABBITMQ_USER_PASSWORD}}"
+LOG_TYPE: raw
+LOG_FILE: /var/log/dispatch.log
