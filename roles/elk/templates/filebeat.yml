@@ -2,18 +2,18 @@ filebeat.inputs:
   - type: log
     enabled: true
 {% if LOG_TYPE == "json" %}
-  json.keys_under_root: true
+    json.keys_under_root: true
 {% endif %}
-  paths:
-    - {{LOG_FILE}}
+    paths:
+      - {{LOG_FILE}}
 {% if COMPONENT == "shipping" %}
-  multiline.type: pattern
-  multiline.pattern: '^2'
-  multiline.negate: true
-  multiline.match: after
+    multiline.type: pattern
+    multiline.pattern: '^2'
+    multiline.negate: true
+    multiline.match: after
 {% endif %}
 {% if COMPONENT == "payment" %}
-  include_lines: ['^\[2']
+    include_lines: ['^\[2']
 {% endif %}
 
 {% if LOG_TYPE == "json" %}
