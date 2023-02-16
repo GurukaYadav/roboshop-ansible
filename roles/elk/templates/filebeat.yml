@@ -16,7 +16,7 @@ filebeat.inputs:
     include_lines: ['^\[2']
 {% endif %}
 {% if COMPONENT == "frontend" %}
-    exclude_lines: ['ratings']
+    exclude_lines: ['*ratings*']
 {% endif %}
 
 {% if LOG_TYPE == "json" %}
