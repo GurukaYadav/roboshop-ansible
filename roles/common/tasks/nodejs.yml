@@ -42,7 +42,7 @@
     dest: /home/roboshop/catalogue/rds-combined-ca-bundle.pem
     mode: '0400'
     owner: roboshop
-  when: 
+  when: DOCDB_ENDPOINT != "null"
 #above 0400 -meaning given the owner only read permisssions
 
 - name: Import a role for {{COMPONENT}} content
