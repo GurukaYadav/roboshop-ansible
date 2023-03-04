@@ -36,6 +36,15 @@
 #  community.general.npm:
 #    path: "{{APP_LOCATION}}"
 
+- name: Download public key for docdb access
+  ansible.builtin.get_url:
+    url: https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+    dest: /home/roboshop/catalogue/rds-combined-ca-bundle.pem
+    mode: '0400'
+    owner: roboshop
+  when: 
+#above 0400 -meaning given the owner only read permisssions
+
 - name: Import a role for {{COMPONENT}} content
   ansible.builtin.include_role:
     name: common
