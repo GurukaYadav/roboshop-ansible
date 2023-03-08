@@ -3,3 +3,5 @@ APP_LOCATION: /home/roboshop/shipping
 SUFFIX:
 LOG_TYPE: raw
 LOG_FILE: /var/log/shipping.log
+MYSQL_USER: "{{SECRETS.RDS_MYSQL_USER}}"
+MYSQL_PASS: "{{SECRETS.RDS_MYSQL_PASS}}"
