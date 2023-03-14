@@ -1,1 +1,2 @@
 components: ["cart","catalogue","user","nginx","shipping","payment","dispatch"]
+env: ["dev","prod"]
