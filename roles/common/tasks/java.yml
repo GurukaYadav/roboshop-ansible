@@ -14,6 +14,10 @@
 #  args:
 #    chdir: /home/roboshop/{{COMPONENT}}
 
+- name: Calculate and provide 80% memory to application execution
+  ansible.builtin.shell: echo "{{ansible_memtotal_mb}} * 0.8" | bc | awk -F . '{print $1}'
+  register: mem
+
 - name: Import a role for {{COMPONENT}} content
   ansible.builtin.include_role:
     name: common
