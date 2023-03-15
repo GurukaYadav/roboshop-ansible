@@ -6,7 +6,7 @@ User=roboshop
 Environment=CART_ENDPOINT=cart-{{ENV}}.roboshop.internal
 Environment=CART_PORT= 80
 Environment=DB_HOST={{RDS_ENDPOINT}}
-ExecStart=/bin/java -Xms{{mem}}m -Xmx{{mem}}m -jar /home/roboshop/shipping/shipping.jar
+ExecStart=/bin/java -Xms{{mem.stdout}}m -Xmx{{mem.stdout}}m -jar /home/roboshop/shipping/shipping.jar
 SyslogIdentifier=shipping
 
 [Install]
