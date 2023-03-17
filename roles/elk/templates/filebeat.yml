@@ -36,6 +36,9 @@ fields:
   component: {{COMPONENT}}
 {% endif %}
 
+#logging.level: debug
+logging.metrics.enabled: false
+
 
 # ----------------------------------------------------------------
 
