@@ -36,14 +36,11 @@ fields:
   component: {{COMPONENT}}
 {% endif %}
 
+#used this to remove logs with error message "non-zero metrics in the last 30sec"
 #logging.level: debug
 logging.metrics.enabled: false
 
-processors:
-  - drop_event:
-    when:
-      contains:
-        message: "ELB-HealthChecker"
+
 # ----------------------------------------------------------------
 
 filebeat.config.modules:
