@@ -40,6 +40,11 @@ fields:
 #logging.level: debug
 logging.metrics.enabled: false
 
+processors:
+  - drop_event:
+    when:
+      contains:
+        message: "ELB-HealthChecker"
 
 # ----------------------------------------------------------------
 
@@ -57,7 +62,4 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
-  - drop_event:
-    when:
-      contains:
-        message: "ELB-HealthChecker"
+ 
