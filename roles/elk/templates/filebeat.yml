@@ -16,7 +16,7 @@ filebeat.inputs:
     include_lines: ['^\[2']
 {% endif %}
 #{% if COMPONENT == "frontend" %}
-#    exclude_lines: ['*ratings*']
+#    exclude_lines: ['/health/*']
 #{% endif %}
 
 {% if LOG_TYPE == "json" %}
@@ -39,7 +39,11 @@ fields:
 #logging.level: debug
 logging.metrics.enabled: false
 
-
+processors:
+  - drop_event:
+    when:
+      contains:
+        message: "ELB-HealthChecker"
 # ----------------------------------------------------------------
 
 filebeat.config.modules:
@@ -56,5 +60,7 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
-
-
+  - drop_event:
+    when:
+      contains:
+        message: "ELB-HealthChecker"
