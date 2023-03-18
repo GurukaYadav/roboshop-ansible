@@ -40,6 +40,7 @@ fields:
 #logging.level: debug
 logging.metrics.enabled: false
 
+#used to drop the health check logs
 processors:
   - drop_event:
     when:
