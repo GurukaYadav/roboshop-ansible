@@ -13,41 +13,38 @@
     path: "{{APP_LOCATION}}"
     state: directory
 
-#- name: Unarchive a file that needs to be downloaded
-#  ansible.builtin.unarchive:
-#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-#    dest: /tmp
-#    remote_src: yes
 
 #when app-version is not defined, we need to get latest version from Nexus
-- name: Latest version of application from Nexus
-  ansible.builtin.shell: curl -s http://nexus.roboshop.internal:8081/service/rest/repository/browse/{{COMPONENT}}/ | grep zip | grep {{ENV}}-{{COMPONENT}} | sed -e 's/"/ /g'| xargs -n1|grep ^http | tail -n1
-
-  register: output
-  when: APP_VERSION is undefined
-
-- name: fact setting for latest version of application form Nexus
-  ansible.builtin.set_fact:
-    URL: "{{output.stdout}}"
-  when: APP_VERSION is undefined
-
-- name: Application version given by the user
-  ansible.builtin.set_fact:
-    URL: http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{ENV}}-{{COMPONENT}}-{{APP_VERSION}}.zip
-  when: APP_VERSION is defined
+#- name: Latest version of application from Nexus
+#  ansible.builtin.shell: curl -s http://nexus.roboshop.internal:8081/service/rest/repository/browse/{{COMPONENT}}/ | grep zip | grep {{ENV}}-{{COMPONENT}} | sed -e 's/"/ /g'| xargs -n1|grep ^http | tail -n1
+#
+#  register: output
+#  when: APP_VERSION is undefined
+#
+#- name: fact setting for latest version of application form Nexus
+#  ansible.builtin.set_fact:
+#    URL: "{{output.stdout}}"
+#  when: APP_VERSION is undefined
+#
+#- name: Application version given by the user
+#  ansible.builtin.set_fact:
+#    URL: http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{ENV}}-{{COMPONENT}}-{{APP_VERSION}}.zip
+#  when: APP_VERSION is defined
+#
+#- name: Unarchive a {{COMPONENT}} file that needs to be downloaded
+#  ansible.builtin.unarchive:
+#    src: "{{URL}}"
+#    dest: "{{APP_LOCATION}}"
+#    remote_src: yes
 
 - name: Unarchive a {{COMPONENT}} file that needs to be downloaded
   ansible.builtin.unarchive:
-    src: "{{URL}}"
+    src: "/tmp/{{COMPONENT}}.zip"
     dest: "{{APP_LOCATION}}"
     remote_src: yes
 
 
-#- name: Move the content to the app location
-#  ansible.builtin.copy:
-#    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
-#    dest: "{{APP_LOCATION}}"
-#    remote_src: yes
+
 
 
 
