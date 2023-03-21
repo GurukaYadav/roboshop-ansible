@@ -12,19 +12,19 @@
   ansible.builtin.template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
-  notify: Restart nginx service
+#  notify: Restart nginx service
 
 - name: Copy the nginx configuration file
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
-  notify: Restart nginx service
+#  notify: Restart nginx service
   
-- name: Start nginx service
-  ansible.builtin.systemd:
-    name: nginx
-    state: started
-    enabled: yes
+#- name: Start nginx service
+#  ansible.builtin.systemd:
+#    name: nginx
+#    state: started
+#    enabled: yes
 
 - name: Install filebeat
   ansible.builtin.include_role:
