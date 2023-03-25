@@ -46,7 +46,7 @@ processors:
   - drop_event:
     when:
       contains:
-        message: "ELB-HealthChecker"
+        message: "/health"
 
 # ----------------------------------------------------------------
 
