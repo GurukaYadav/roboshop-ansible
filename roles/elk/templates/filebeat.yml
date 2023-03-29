@@ -34,7 +34,6 @@ output.logstash:
   hosts: [ "logstash.roboshop.internal:5044" ]
 fields:
   component: {{COMPONENT}}
-  component: {{ENV}}
 {% endif %}
 
 #used this to remove logs with error message "non-zero metrics in the last 30sec"
